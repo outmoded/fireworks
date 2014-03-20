@@ -1,0 +1,31 @@
+{
+  "name": "fireworks",
+  "description": "NodeConf July 4th Fireworks Show",
+  "version": "0.0.0",
+  "author": "Eran Hammer <eran@hueniverse.com> (http://hueniverse.com)",
+  "contributors": [],
+  "repository": "git://github.com/hueniverse/fireworks",
+  "main": "index",
+  "keywords": [
+    "nodeconf",
+    "fireworks",
+    "show"
+  ],
+  "engines": {
+    "node": ">=0.10.22"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "lab": "1.x.x"
+  },
+  "scripts": {
+    "test": "make test-cov"
+  },
+  "licenses": [
+    {
+      "type": "BSD",
+      "url": "http://github.com/hueniverse/fireworks/raw/master/LICENSE"
+    }
+  ]
+}
