@@ -34,4 +34,4 @@ var animaiton = [sequence, sequence, sequence];
 
 The strands are organized as follows:
 
-[!https://raw.githubusercontent.com/hueniverse/fireworks/master/images/layout.png]
+[![Layout](https://raw.githubusercontent.com/hueniverse/fireworks/master/images/layout-small.png)](https://raw.githubusercontent.com/hueniverse/fireworks/master/images/layout.png)
