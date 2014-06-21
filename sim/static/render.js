@@ -108,7 +108,7 @@ var lightPixel = function (strandId, led, color) {
 };
 
 
-var play = function (animation, delay) {
+var play = function (animation, fps) {
 
     var source = [];
     animation.forEach(function (strand, id) {
@@ -117,6 +117,8 @@ var play = function (animation, delay) {
             source.push({ id: id, data: strand });
         }
     });
+
+    var delay = 1000 / fps;
 
     var display = function (tick, strands) {
 
