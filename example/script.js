@@ -4,65 +4,68 @@ var Fireworks = require('../');
 var C = Fireworks.color;
 
 
-var zoe = [
-    {
-        type: 'launch',
-        colors: [C.purple, 0, C.pink],
-        size: 5,
-        audio: 'launch'
-    },
-    {
-        type: 'overlay',
-        offset: 10,
-        first: {
-            type: 'burst',
-            color: C.purple,
-            size: 7,
-            audio: 'burst'
+var zoe = {
+    type: 'timeline',
+    sets: [
+        [0, [{
+            type: 'launch',
+            colors: [C.purple, 0, C.pink],
+            size: 5,
+            audio: 'launch'
         },
-        second: {
-            type: 'tails',
-            color: C.pink,
-            size: 7,
-            audio: 'burst'
-        }
-    },
-    {
-        type: 'launch',
-        colors: [0, C.yellow, 0],
-        size: 8,
-        audio: 'launch'
-    },
-    {
-        type: 'curve',
-        duration: 30,
-        colors: [C.yellow, 0, 0],
-        audio: 'sparkle'
-    },
-    {
-        type: 'launch',
-        colors: [C.blue, C.cyan, C.blue],
-        sizes: [8, 5, 8],
-        audio: 'launch'
-    },
-    {
-        type: 'overlay',
-        offset: 2,
-        first: {
-            type: 'stars',
-            location: 'inner',
-            size: 10,
-            color: C.cyan,
-            audio: 'burst'
+        {
+            type: 'overlay',
+            offset: 10,
+            first: {
+                type: 'burst',
+                color: C.purple,
+                size: 7,
+                audio: 'burst'
+            },
+            second: {
+                type: 'tails',
+                color: C.pink,
+                size: 7,
+                audio: 'burst'
+            }
         },
-        second: {
+        {
+            type: 'launch',
+            colors: [0, C.yellow, 0],
+            size: 8,
+            audio: 'launch'
+        },
+        {
             type: 'curve',
-            colors: [0, C.blue, C.blue],
-            duration: 40,
+            duration: 30,
+            colors: [C.yellow, 0, 0],
             audio: 'sparkle'
-        }
-    }
-];
+        },
+        {
+            type: 'launch',
+            colors: [C.blue, C.cyan, C.blue],
+            sizes: [8, 5, 8],
+            audio: 'launch'
+        },
+        {
+            type: 'overlay',
+            offset: 2,
+            first: {
+                type: 'stars',
+                location: 'inner',
+                size: 10,
+                color: C.cyan,
+                audio: 'burst'
+            },
+            second: {
+                type: 'curve',
+                colors: [0, C.blue, C.blue],
+                duration: 40,
+                audio: 'sparkle'
+            }
+        }]]
+    ]
+};
 
 
 var whiteBurst = [
