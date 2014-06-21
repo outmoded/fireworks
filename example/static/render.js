@@ -15,7 +15,7 @@ var FULL_CIRCLE = 2 * Math.PI;
 var PX_PER_METER = 200;
 var OUTER_RADIUS = 2;
 var OFFSET = OUTER_RADIUS * PX_PER_METER;
-var FOLD_RADIUS = 0.1;
+var FOLD_RADIUS = 0.02;
 var ROTATE = Math.PI / 4.1;
 
 
@@ -35,24 +35,18 @@ var mapLine = function (line, pixelId) {
     var lineOffset = line - NUM_CIRCLES;
     var lineMod = lineOffset % 4;
 
-    // A bit of a hack here. We want to fold one of the lines slightly early
-    // to provide spacing between other objects displayed on the screen.
-    // If rotate is changed then the special casing here will need to be adjusted.
-
-    var currentFold = lineOffset / 4 < 1 ? FOLD_RADIUS * 1.8 : FOLD_RADIUS;
-
     var angle = FULL_CIRCLE * lineOffset / NUM_LINES + ROTATE;
     var radius = OUTER_RADIUS - pixelId / LIGHTS_PER_METER;
 
     if (!lineMod &&
-        radius < currentFold) {
+        radius < FOLD_RADIUS) {
 
         // Fake the depth for the components that are "folded over"
 
         return [
-          currentFold * Math.cos(angle),
-          currentFold * Math.sin(angle) - radius + currentFold,
-          currentFold - radius
+            1.5 * (lineOffset - 4) / PX_PER_METER,
+            -radius,
+            1
         ];
     }
 
