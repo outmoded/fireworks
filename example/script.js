@@ -63,11 +63,83 @@ internals.set = [
 ];
 
 
+var whiteBurst = [
+    {
+        type: 'launch',
+        colors: [C.white, 0, 0],
+        size: 3,
+        blanks: 15
+    },
+    {
+        type: 'overlay',
+        offset: 'end',
+        first: {
+            type: 'burst',
+            color: C.white,
+            size: 2
+        },
+        second: {
+            type: 'tails',
+            color: C.white,
+            size: 1
+        }
+    }
+];
+
+
+var redStars = [
+    {
+        type: 'launch',
+        colors: [0, C.red, 0],
+        size: 5,
+        blanks: 15
+    },
+    {
+        type: 'stars',
+        location: 'inner',
+        size: 10,
+        color: C.red
+    },
+    {
+        type: 'stars',
+        location: 'outter',
+        size: 10,
+        color: C.red
+    }
+];
+
+
+var blueCircles = [
+    {
+        type: 'launch',
+        colors: [0, 0, C.blue],
+        size: 5,
+        blanks: 40
+    },
+    {
+        type: 'curve',
+        duration: 30,
+        color: C.blue
+    }
+];
+
+
 internals.instructions = {
-    type: 'overlay',
-    offset: 45,
-    first: internals.set,
-    second: internals.set
+    type: 'timeline',
+    sets: [
+        [0, whiteBurst],
+        [5, blueCircles],
+        [10, whiteBurst],
+        [15, redStars],
+        [10, whiteBurst],
+        [15, redStars],
+        [200, whiteBurst],
+        [5, blueCircles],
+        [10, whiteBurst],
+        [15, redStars],
+        [10, whiteBurst],
+        [15, redStars]
+    ]
 };
 
 
