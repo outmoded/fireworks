@@ -271,29 +271,26 @@ var rainbow = [
         type: 'launch',
         colors: [0, [C.purple, C.blue, C.green, C.yellow, C.orange, C.red], 0],
         size: 6,
-        audio: 'launch'
-    },
-    {
-        type: 'blank',
-        duration: 15,
-        audio: 'burst'
+        audio: 'launch',
+        blanks: 5
     },
     {
         type: 'timeline',
         sets: [
             [0, {
                 type: 'stars',
-                location: 'inner',
-                size: 12,
-                color: [C.purple, C.blue, C.green, C.yellow, C.orange, C.red],
-                audio: 'sparkle'
-            }],
-            [0, {
-                type: 'stars',
                 location: 'outter',
                 size: 12,
                 color: [C.purple, C.blue, C.green, C.yellow, C.orange, C.red],
-                audio: 'burst'
+                audio: 'burst',
+                stretch: 2
+            }],
+            [0, {
+                type: 'stars',
+                location: 'inner',
+                size: 12,
+                color: [C.purple, C.blue, C.green, C.yellow, C.orange, C.red],
+                stretch: 2
             }]
         ]
     }
