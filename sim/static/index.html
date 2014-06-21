@@ -4,9 +4,19 @@
     <title>Fireworks Simulator</title>
     <script src="render.js"></script>
     <script src="data.js"></script>
+    <style>
+        canvas {
+            padding-left: 0;
+            padding-right: 0;
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+            width: 800px;
+        }
+    </style>
 </head>
 <body style="background-color: black">
-    <canvas id="output" width="1200" height="1600"></canvas>
+    <canvas id="output" width="800" height="1600"></canvas>
     <script>
         play(animation, 35);
     </script>
