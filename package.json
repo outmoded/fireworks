@@ -17,6 +17,7 @@
   "dependencies": {
   },
   "devDependencies": {
+    "hapi": "6.x.x",
     "lab": "1.x.x"
   },
   "scripts": {
