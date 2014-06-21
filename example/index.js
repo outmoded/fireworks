@@ -2,6 +2,7 @@
 
 var Hapi = require('hapi');
 var Hoek = require('hoek');
+var Script = require('./script.js');
 
 
 // Declare internals
@@ -11,6 +12,7 @@ var internals = {};
 
 var server = new Hapi.Server(8000);
 server.route({ method: 'GET', path: '/{p*}', handler: { directory: { path: __dirname + '/static' } } });
+server.route({ method: 'GET', path: '/data.js', handler: function (request, reply) { reply(Script.animation); } });
 server.start(function (err) {
 
     Hoek.assert(!err);
