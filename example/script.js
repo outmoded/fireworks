@@ -64,6 +64,7 @@ var zoe = [
     }
 ];
 
+
 var whiteBurst = [
     {
         type: 'launch',
@@ -265,6 +266,40 @@ var forest = [
 ];
 
 
+var rainbow = [
+    {
+        type: 'launch',
+        colors: [0, [C.purple, C.blue, C.green, C.yellow, C.orange, C.red], 0],
+        size: 6,
+        audio: 'launch'
+    },
+    {
+        type: 'blank',
+        duration: 15,
+        audio: 'burst'
+    },
+    {
+        type: 'timeline',
+        sets: [
+            [0, {
+                type: 'stars',
+                location: 'inner',
+                size: 12,
+                color: [C.purple, C.blue, C.green, C.yellow, C.orange, C.red],
+                audio: 'sparkle'
+            }],
+            [0, {
+                type: 'stars',
+                location: 'outter',
+                size: 12,
+                color: [C.purple, C.blue, C.green, C.yellow, C.orange, C.red],
+                audio: 'burst'
+            }]
+        ]
+    }
+];
+
+
 var instructions = {
     type: 'timeline',
     sets: [
@@ -276,7 +311,8 @@ var instructions = {
         [10, whiteBurst],
         [15, redStars],
         [130, fireStorm],
-        [130, forest]
+        [130, forest],
+        [200, rainbow]
     ]
 };
 
