@@ -7,6 +7,8 @@ The NodeConf July 4th Fireworks Show
 Well, @mikeal said we can't blow shit up and light stuff on fire. Something about not burning down the entire forest, blah blah blah. So instead we're going
 to have a virtual fireworks show.
 
+Special thanks to [Kevin Decker](https://twitter.com/kpdecker) for the canvas code powering the simulator.
+
 ## Install
 
 Start by installing the module and running the simulator:
