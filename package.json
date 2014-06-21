@@ -1,9 +1,11 @@
 {
   "name": "fireworks",
   "description": "NodeConf July 4th Fireworks Show",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "author": "Eran Hammer <eran@hueniverse.com> (http://hueniverse.com)",
-  "contributors": [],
+  "contributors": [
+    "Kevin Decker <kpdecker@gmail.com> (http://incaseofstairs.com)"
+  ],
   "repository": "git://github.com/hueniverse/fireworks",
   "main": "index",
   "keywords": [
