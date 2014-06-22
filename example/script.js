@@ -4,6 +4,66 @@ var Fireworks = require('../');
 var C = Fireworks.color;
 
 
+var zoe = [
+    {
+        type: 'launch',
+        colors: [C.purple, 0, C.pink],
+        size: 5,
+        audio: 'launch'
+    },
+    {
+        type: 'overlay',
+        offset: 10,
+        first: {
+            type: 'burst',
+            color: C.purple,
+            size: 7,
+            audio: 'burst'
+        },
+        second: {
+            type: 'tails',
+            color: C.pink,
+            size: 7,
+            audio: 'burst'
+        }
+    },
+    {
+        type: 'launch',
+        colors: [0, C.yellow, 0],
+        size: 8,
+        audio: 'launch'
+    },
+    {
+        type: 'curve',
+        duration: 30,
+        colors: [C.yellow, 0, 0],
+        audio: 'sparkle'
+    },
+    {
+        type: 'launch',
+        colors: [C.blue, C.cyan, C.blue],
+        sizes: [8, 5, 8],
+        audio: 'launch'
+    },
+    {
+        type: 'overlay',
+        offset: 2,
+        first: {
+            type: 'stars',
+            location: 'inner',
+            size: 10,
+            color: C.cyan,
+            audio: 'burst'
+        },
+        second: {
+            type: 'curve',
+            colors: [0, C.blue, C.blue],
+            duration: 40,
+            audio: 'sparkle'
+        }
+    }
+];
+
 var whiteBurst = [
     {
         type: 'launch',
@@ -152,8 +212,14 @@ var forest = [
         type: 'launch',
         colors: [C.green, C.darkgreen, C.olive],
         size: 4,
-        blanks: 20,
         audio: 'launch'
+    },
+    {
+        type: 'burst',
+        color: C.green,
+        size: 1,
+        slice: [5, 15],
+        audio: 'burst'
     },
     {
         type: 'timeline',
@@ -202,7 +268,8 @@ var forest = [
 var instructions = {
     type: 'timeline',
     sets: [
-        [0, whiteBurst],
+        [0, zoe],
+        [300, whiteBurst],
         [5, blueCircles],
         [10, whiteBurst],
         [15, redStars],
