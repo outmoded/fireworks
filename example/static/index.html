@@ -18,7 +18,10 @@
 <body style="background-color: black">
     <canvas id="output" width="800" height="1600"></canvas>
     <script>
-        play(animation, 50);
+        loadAudio(function () {
+
+            play(animation, 50);
+        });
     </script>
 </body>
 </html>

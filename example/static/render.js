@@ -110,43 +110,29 @@ var lightPixel = function (strandId, led, color) {
 
 var play = function (animation, fps) {
 
-    var source = [];
-    animation.forEach(function (strand, id) {
-
-        if (strand.length) {
-            source.push({ id: id, data: strand });
-        }
-    });
-
     var delay = 1000 / fps;
 
-    var display = function (tick, strands) {
+    var display = function (tick) {
 
-        var nextRound = [];
-        for (var i = 0, il = strands.length; i < il; ++i) {
-            var strand = strands[i];
-            if (strand.data.length > tick + 1) {
-                nextRound.push(strand);
-            }
+        if (animation[3][tick]) {
+            effect(animation[3][tick]);
+        }
 
-            var leds = strand.data[tick];
+        for (var i = 0; i < 3; ++i) {
+            var leds = animation[i][tick];
             for (var l = 0, ll = leds.length; l < ll; ++l) {
-                lightPixel(strand.id, l, toHex(leds[l]));
+                lightPixel(i, l, toHex(leds[l]));
             }
         }
 
         setTimeout(function () {
 
-            if (nextRound.length) {
-                display(tick + 1, nextRound);
-            }
-            else {
-                display(0, source);
-            }
+            ++tick;
+            display(tick < animation[0].length ? tick : 0);
         }, delay);
     };
 
-    display(0, source);
+    display(0);
 };
 
 
@@ -155,4 +141,50 @@ var toHex = function (number) {
     var hex = number.toString(16);
     var pad = '000000';
     return '#' + pad.substring(0, pad.length - hex.length) + hex;
+};
+
+
+// Audio
+
+var audioContext = new AudioContext();
+var sounds = {};
+
+var loadAudio = function (callback) {
+
+    var load = function (url, next) {
+
+        var request = new XMLHttpRequest();
+        request.open('GET', url, true);
+        request.responseType = 'arraybuffer';
+
+        request.onload = function () {
+
+            audioContext.decodeAudioData(request.response, next);
+        };
+
+        request.send();
+    };
+
+    load('/audio/launch.mp3', function (sound) {
+
+        sounds.launch = sound;
+        load('/audio/burst.mp3', function (sound) {
+
+            sounds.burst = sound;
+            load('/audio/sparkle.mp3', function (sound) {
+
+                sounds.sparkle = sound;
+                callback();
+            });
+        });
+    });
+};
+
+
+var effect = function (track) {
+
+    var source = audioContext.createBufferSource();
+    source.buffer = sounds[track];
+    source.connect(audioContext.destination);
+    source.start(0);
 };
