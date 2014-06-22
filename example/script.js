@@ -116,7 +116,7 @@ var fireStorm = [
         location: 'outter',
         size: 12,
         colors: [C.red, C.yellow, C.orange],
-        audio: 'sparkle'
+        audio: 'burst'
     }
 ];
 
