@@ -19,6 +19,10 @@ var FOLD_RADIUS = 0.02;
 var ROTATE = Math.PI / 4.1;
 
 
+var output = document.getElementById('output');
+var context = output.getContext('2d');
+
+
 var mapLine = function (line, pixelId) {
 
     // Circular components
@@ -55,10 +59,6 @@ var mapLine = function (line, pixelId) {
 
 
 var lightPixelByLine = function (line, pixel, color) {
-
-    var output = document.getElementById('output');
-    var context = output.getContext('2d');
-
     var map = mapLine(line, pixel);
     context.fillStyle = color;
     context.fillRect(OFFSET + PX_PER_METER * map[0], OFFSET + PX_PER_METER * map[1], 4, 4);
