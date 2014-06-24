@@ -323,8 +323,10 @@ var whirl = [
             }],
             [5, {
                 type: 'spin',
+                location: 'inner',
                 color: C.white,
                 size: 15,
+                steps: 45,
                 audio: 'burst'
             }],
             [10, {
@@ -368,6 +370,25 @@ var instructions = {
         [130, fireStorm],
         [130, forest],
         [200, rainbow]
+    ]
+};
+
+
+var solid = {
+    type: 'timeline',
+    sets: [
+        [0, {
+            type: 'solid',
+            colors: [[C.red], 0, 0]
+        }],
+        [0, {
+            type: 'solid',
+            colors: [0, [C.green], 0]
+        }],
+        [0, {
+            type: 'solid',
+            colors: [0, 0, [C.blue]]
+        }]
     ]
 };
 
