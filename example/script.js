@@ -321,6 +321,12 @@ var whirl = [
                 size: 20,
                 audio: 'burst'
             }],
+            [5, {
+                type: 'spin',
+                color: C.white,
+                size: 15,
+                audio: 'burst'
+            }],
             [10, {
                 type: 'tails',
                 color: C.white,
@@ -347,7 +353,7 @@ var whirl = [
 var instructions = {
     type: 'timeline',
     sets: [
-        [0, whirl],
+        [50, whirl],
         [100, simpleBurst(C.purple, 0)],
         [15, simpleTails(C.pink, 2, 3)],
         [15, simpleBurst(C.pink, 1)],
