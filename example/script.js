@@ -13,13 +13,13 @@ var simpleBurst = function (color, strand, stretch) {
         {
             type: 'launch',
             colors: colors,
-            size: 5,
+            size: 10,
             audio: 'launch'
         },
         {
             type: 'burst',
             color: color,
-            size: 7,
+            size: 15,
             audio: 'burst',
             stretch: stretch
         }
@@ -36,14 +36,14 @@ var simpleTails = function (color, strand, stretch) {
         {
             type: 'launch',
             colors: colors,
-            size: 5,
+            size: 10,
             audio: 'launch',
             blanks: 10
         },
         {
             type: 'tails',
             color: color,
-            size: 7,
+            size: 15,
             audio: 'burst',
             stretch: stretch
         }
@@ -60,7 +60,7 @@ var simpleCurve = function (color, location, strand) {
         {
             type: 'launch',
             colors: colors,
-            size: 8,
+            size: 15,
             audio: 'launch'
         },
         {
@@ -77,7 +77,7 @@ var whiteBurst = [
     {
         type: 'launch',
         colors: [C.white, 0, 0],
-        size: 3,
+        size: 10,
         blanks: 15,
         audio: 'launch'
     },
@@ -87,13 +87,13 @@ var whiteBurst = [
         first: {
             type: 'burst',
             color: C.white,
-            size: 2,
+            size: 5,
             audio: 'burst'
         },
         second: {
             type: 'tails',
             color: C.white,
-            size: 1
+            size: 5
         }
     }
 ];
@@ -103,21 +103,21 @@ var redStars = [
     {
         type: 'launch',
         colors: [0, C.red, 0],
-        size: 5,
+        size: 10,
         blanks: 15,
         audio: 'launch'
     },
     {
         type: 'stars',
         location: 'inner',
-        size: 10,
+        size: 15,
         color: C.red,
         audio: 'sparkle'
     },
     {
         type: 'stars',
         location: 'outter',
-        size: 10,
+        size: 15,
         color: C.red,
         audio: 'sparkle'
     }
@@ -128,7 +128,7 @@ var blueCircles = [
     {
         type: 'launch',
         colors: [0, 0, C.blue],
-        size: 5,
+        size: 10,
         blanks: 40,
         audio: 'launch'
     },
@@ -145,7 +145,7 @@ var fireStorm = [
     {
         type: 'launch',
         colors: [C.red, C.yellow, C.orange],
-        size: 4,
+        size: 10,
         audio: 'launch'
     },
     {
@@ -157,13 +157,13 @@ var fireStorm = [
             first: {
                 type: 'burst',
                 colors: [C.red, C.yellow, C.orange],
-                sizes: [3, 4, 5],
+                sizes: [6, 8, 10],
                 audio: 'burst'
             },
             second: {
                 type: 'tails',
                 colors: [C.red, C.yellow, C.orange],
-                sizes: [3, 3, 3]
+                sizes: [6, 6, 6]
             }
         },
         second: {
@@ -176,14 +176,14 @@ var fireStorm = [
     {
         type: 'stars',
         location: 'inner',
-        size: 8,
+        size: 15,
         colors: [C.red, C.yellow, C.orange],
         audio: 'sparkle'
     },
     {
         type: 'stars',
         location: 'outter',
-        size: 12,
+        size: 15,
         colors: [C.red, C.yellow, C.orange],
         audio: 'burst'
     }
@@ -219,14 +219,14 @@ var stars = function (color, size, curve) {
 var forest = [
     {
         type: 'launch',
-        colors: [C.green, C.darkgreen, C.olive],
-        size: 4,
+        colors: [C.green, C.lightgreen, C.olive],
+        size: 10,
         audio: 'launch'
     },
     {
         type: 'burst',
         color: C.green,
-        size: 1,
+        size: 5,
         slice: [5, 15],
         audio: 'burst'
     },
@@ -249,13 +249,13 @@ var forest = [
                 type: 'random',
                 duration: 15,
                 offset: 8,
-                sets: stars(C.darkgreen, 10, 'outter')
+                sets: stars(C.lightgreen, 10, 'outter')
             }],
             [5, {
                 type: 'random',
                 duration: 15,
                 offset: 8,
-                sets: stars(C.darkgreen, 10, 'inner')
+                sets: stars(C.lightgreen, 10, 'inner')
             }],
             [10, {
                 type: 'random',
@@ -305,10 +305,21 @@ var rainbow = [
 ];
 
 
+var whirl = [
+    {
+        type: 'whirl',
+        color: C.white,
+        size: 20,
+        audio: 'whirl'
+    }
+];
+
+
 var instructions = {
     type: 'timeline',
     sets: [
-        [0, simpleBurst(C.purple, 0)],
+        [0, whirl],
+        [200, simpleBurst(C.purple, 0)],
         [15, simpleTails(C.pink, 2, 3)],
         [15, simpleBurst(C.pink, 1)],
         [70, simpleCurve(C.yellow, 'inner', 0)],
