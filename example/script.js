@@ -307,10 +307,49 @@ var rainbow = [
 
 var whirl = [
     {
-        type: 'whirl',
-        color: C.white,
-        size: 20,
-        audio: 'whirl'
+        type: 'timeline',
+        sets: [
+            [0, {
+                type: 'whirl',
+                color: C.white,
+                size: 20,
+                audio: 'whirl'
+            }],
+            [35, {
+                type: 'blank',
+                duration: 1,
+                audio: 'whirl'
+            }]
+        ]
+    },
+    {
+        type: 'timeline',
+        sets: [
+            [0, {
+                type: 'burst',
+                color: C.white,
+                size: 20,
+                audio: 'burst'
+            }],
+            [10, {
+                type: 'tails',
+                color: C.white,
+                size: 20,
+                stretch: 2
+            }],
+            [10, {
+                type: 'burst',
+                color: C.white,
+                size: 20,
+                audio: 'burst'
+            }],
+            [10, {
+                type: 'tails',
+                color: C.white,
+                size: 20,
+                stretch: 2
+            }]
+        ]
     }
 ];
 
@@ -319,7 +358,7 @@ var instructions = {
     type: 'timeline',
     sets: [
         [0, whirl],
-        [200, simpleBurst(C.purple, 0)],
+        [100, simpleBurst(C.purple, 0)],
         [15, simpleTails(C.pink, 2, 3)],
         [15, simpleBurst(C.pink, 1)],
         [70, simpleCurve(C.yellow, 'inner', 0)],

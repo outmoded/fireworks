@@ -174,7 +174,11 @@ var loadAudio = function (callback) {
             load('/audio/sparkle.mp3', function (sound) {
 
                 sounds.sparkle = sound;
-                callback();
+                load('/audio/whirl.mp3', function (sound) {
+
+                    sounds.whirl = sound;
+                    callback();
+                });
             });
         });
     });
