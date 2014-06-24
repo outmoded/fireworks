@@ -108,6 +108,8 @@ var play = function (animation, fps) {
 
     var display = function (tick) {
 
+        output.width = output.width;
+
         if (animation[3][tick]) {
             effect(animation[3][tick]);
         }
@@ -115,7 +117,9 @@ var play = function (animation, fps) {
         for (var i = 0; i < 3; ++i) {
             var leds = animation[i][tick];
             for (var l = 0, ll = leds.length; l < ll; ++l) {
-                lightPixel(i, l, toHex(leds[l]));
+                if (leds[l]) {
+                    lightPixel(i, l, toHex(leds[l]));
+                }
             }
         }
 
@@ -131,6 +135,10 @@ var play = function (animation, fps) {
 
 
 var toHex = function (number) {
+
+    if (!number) {
+        return;
+    }
 
     var hex = number.toString(16);
     var pad = '000000';
