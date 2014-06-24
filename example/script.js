@@ -110,14 +110,14 @@ var redStars = [
     {
         type: 'stars',
         location: 'inner',
-        size: 15,
+        size: 8,
         color: C.red,
         audio: 'sparkle'
     },
     {
         type: 'stars',
         location: 'outter',
-        size: 15,
+        size: 8,
         color: C.red,
         audio: 'sparkle'
     }
@@ -157,13 +157,13 @@ var fireStorm = [
             first: {
                 type: 'burst',
                 colors: [C.red, C.yellow, C.orange],
-                sizes: [6, 8, 10],
+                size: 15,
                 audio: 'burst'
             },
             second: {
                 type: 'tails',
                 colors: [C.red, C.yellow, C.orange],
-                sizes: [6, 6, 6]
+                sizes: [8, 8, 8]
             }
         },
         second: {
@@ -176,14 +176,14 @@ var fireStorm = [
     {
         type: 'stars',
         location: 'inner',
-        size: 15,
+        size: 8,
         colors: [C.red, C.yellow, C.orange],
         audio: 'sparkle'
     },
     {
         type: 'stars',
         location: 'outter',
-        size: 15,
+        size: 8,
         colors: [C.red, C.yellow, C.orange],
         audio: 'burst'
     }
@@ -237,37 +237,37 @@ var forest = [
                 type: 'random',
                 duration: 15,
                 offset: 8,
-                sets: stars(C.green, 10, 'outter')
+                sets: stars(C.green, 7, 'outter')
             }],
             [0, {
                 type: 'random',
                 duration: 15,
                 offset: 8,
-                sets: stars(C.green, 10, 'inner')
+                sets: stars(C.green, 7, 'inner')
             }],
             [5, {
                 type: 'random',
                 duration: 15,
                 offset: 8,
-                sets: stars(C.lightgreen, 10, 'outter')
+                sets: stars(C.lightgreen, 7, 'outter')
             }],
             [5, {
                 type: 'random',
                 duration: 15,
                 offset: 8,
-                sets: stars(C.lightgreen, 10, 'inner')
+                sets: stars(C.lightgreen, 7, 'inner')
             }],
             [10, {
                 type: 'random',
                 duration: 15,
                 offset: 8,
-                sets: stars(C.olive, 10, 'outter')
+                sets: stars(C.olive, 7, 'outter')
             }],
             [10, {
                 type: 'random',
                 duration: 15,
                 offset: 8,
-                sets: stars(C.olive, 10, 'inner')
+                sets: stars(C.olive, 7, 'inner')
             }]
         ]
     }
@@ -288,7 +288,7 @@ var rainbow = [
             [0, {
                 type: 'stars',
                 location: 'outter',
-                size: 12,
+                size: 8,
                 color: [C.purple, C.blue, C.green, C.yellow, C.orange, C.red],
                 audio: 'burst',
                 stretch: 2
@@ -296,7 +296,7 @@ var rainbow = [
             [0, {
                 type: 'stars',
                 location: 'inner',
-                size: 12,
+                size: 8,
                 color: [C.purple, C.blue, C.green, C.yellow, C.orange, C.red],
                 stretch: 2
             }]
@@ -307,20 +307,10 @@ var rainbow = [
 
 var whirl = [
     {
-        type: 'timeline',
-        sets: [
-            [0, {
-                type: 'whirl',
-                color: C.white,
-                size: 20,
-                audio: 'whirl'
-            }],
-            [35, {
-                type: 'blank',
-                duration: 1,
-                audio: 'whirl'
-            }]
-        ]
+        type: 'whirl',
+        color: C.white,
+        size: 20,
+        audio: 'whirl'
     },
     {
         type: 'timeline',
