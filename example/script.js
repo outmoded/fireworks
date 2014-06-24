@@ -4,67 +4,72 @@ var Fireworks = require('../');
 var C = Fireworks.color;
 
 
-var zoe = {
-    type: 'timeline',
-    sets: [
-        [0, [{
+var simpleBurst = function (color, strand, stretch) {
+
+    var colors = [0, 0, 0];
+    colors[strand] = color;
+
+    return [
+        {
             type: 'launch',
-            colors: [C.purple, 0, C.pink],
+            colors: colors,
             size: 5,
             audio: 'launch'
         },
         {
-            type: 'overlay',
-            offset: 10,
-            first: {
-                type: 'burst',
-                color: C.purple,
-                size: 7,
-                audio: 'burst'
-            },
-            second: {
-                type: 'tails',
-                color: C.pink,
-                size: 7,
-                audio: 'burst'
-            }
-        },
+            type: 'burst',
+            color: color,
+            size: 7,
+            audio: 'burst',
+            stretch: stretch
+        }
+    ];
+};
+
+
+var simpleTails = function (color, strand, stretch) {
+
+    var colors = [0, 0, 0];
+    colors[strand] = color;
+
+    return [
         {
             type: 'launch',
-            colors: [0, C.yellow, 0],
+            colors: colors,
+            size: 5,
+            audio: 'launch',
+            blanks: 10
+        },
+        {
+            type: 'tails',
+            color: color,
+            size: 7,
+            audio: 'burst',
+            stretch: stretch
+        }
+    ];
+};
+
+
+var simpleCurve = function (color, location, strand) {
+
+    var colors = [0, 0, 0];
+    colors[strand] = color;
+
+    return [
+        {
+            type: 'launch',
+            colors: colors,
             size: 8,
             audio: 'launch'
         },
         {
             type: 'curve',
-            duration: 30,
-            colors: [C.yellow, 0, 0],
+            duration: 40,
+            colors: location === 'inner' ? [color, 0, 0] : [0, color, color],
             audio: 'sparkle'
-        },
-        {
-            type: 'launch',
-            colors: [C.blue, C.cyan, C.blue],
-            sizes: [8, 5, 8],
-            audio: 'launch'
-        },
-        {
-            type: 'overlay',
-            offset: 2,
-            first: {
-                type: 'stars',
-                location: 'inner',
-                size: 10,
-                color: C.cyan,
-                audio: 'burst'
-            },
-            second: {
-                type: 'curve',
-                colors: [0, C.blue, C.blue],
-                duration: 40,
-                audio: 'sparkle'
-            }
-        }]]
-    ]
+        }
+    ];
 };
 
 
@@ -140,7 +145,7 @@ var fireStorm = [
     {
         type: 'launch',
         colors: [C.red, C.yellow, C.orange],
-        sizes: [3, 6, 9],
+        size: 4,
         audio: 'launch'
     },
     {
@@ -303,9 +308,13 @@ var rainbow = [
 var instructions = {
     type: 'timeline',
     sets: [
-        [0, zoe],
-        [300, whiteBurst],
-        [5, blueCircles],
+        [0, simpleBurst(C.purple, 0)],
+        [15, simpleTails(C.pink, 2, 3)],
+        [15, simpleBurst(C.pink, 1)],
+        [70, simpleCurve(C.yellow, 'inner', 0)],
+        [15, simpleCurve(C.orange, 'outter', 2)],
+        [50, whiteBurst],
+        [15, blueCircles],
         [10, whiteBurst],
         [15, redStars],
         [10, whiteBurst],
