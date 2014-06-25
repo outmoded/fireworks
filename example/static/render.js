@@ -6,6 +6,12 @@ var NUM_PIXELS = [
   5, 1, 2, 1
 ].map(function (value) { return Math.floor(value * LIGHTS_PER_METER); });
 
+// Explicit ordering for vertical sections to ensure they match with the right line in the circle
+var VERTICAL_MAP = {
+    0: -4,
+    4: 4,
+    8: 0
+};
 
 var NUM_CIRCLES = 2;
 var NUM_LINES = NUM_PIXELS.length - NUM_CIRCLES;
@@ -46,7 +52,7 @@ var mapLine = function (line, pixelId) {
         // Fake the depth for the components that are "folded over"
 
         return [
-            1.5 * (lineOffset - 4) / PX_PER_METER,
+            1.5 * VERTICAL_MAP[lineOffset] / PX_PER_METER,
             -radius,
             1
         ];
