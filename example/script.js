@@ -288,17 +288,17 @@ var rainbow = [
             [0, {
                 type: 'stars',
                 location: 'outter',
-                size: 8,
+                size: 10,
                 color: [C.purple, C.blue, C.green, C.yellow, C.orange, C.red],
                 audio: 'burst',
-                stretch: 2
+                stretch: 7
             }],
             [0, {
                 type: 'stars',
                 location: 'inner',
-                size: 8,
+                size: 10,
                 color: [C.purple, C.blue, C.green, C.yellow, C.orange, C.red],
-                stretch: 2
+                stretch: 7
             }]
         ]
     }
@@ -318,35 +318,67 @@ var whirl = [
             [0, {
                 type: 'burst',
                 color: C.white,
-                size: 20,
-                audio: 'burst'
-            }],
-            [5, {
-                type: 'spin',
-                location: 'inner',
-                color: C.white,
                 size: 15,
-                steps: 45,
                 audio: 'burst'
             }],
             [10, {
                 type: 'tails',
                 color: C.white,
-                size: 20,
+                size: 15,
                 stretch: 2
             }],
             [10, {
                 type: 'burst',
                 color: C.white,
-                size: 20,
+                size: 15,
                 audio: 'burst'
             }],
             [10, {
                 type: 'tails',
                 color: C.white,
-                size: 20,
+                size: 15,
                 stretch: 2
             }]
+        ]
+    }
+];
+
+
+var spinElement = function (color, location, offset) {
+
+    return {
+        type: 'spin',
+        location: location,
+        color: color,
+        size: 15,
+        steps: 15,
+        offset: offset
+    };
+};
+
+
+var spin = [
+    {
+        type: 'whirl',
+        color: C.white,
+        size: 20,
+        audio: 'whirl'
+    },
+    {
+        type: 'timeline',
+        sets: [
+            [0, spinElement(C.white, 'inner', 0)],
+            [0, spinElement(C.white, 'inner', 75)],
+            [0, spinElement(C.white, 'outter', 0)],
+            [0, spinElement(C.white, 'outter', 225)],
+            [10, spinElement(C.white, 'inner', 75)],
+            [0, spinElement(C.white, 'inner', 125)],
+            [0, spinElement(C.white, 'outter', 75)],
+            [0, spinElement(C.white, 'outter', 300)],
+            [10, spinElement(C.white, 'inner', 150)],
+            [0, spinElement(C.white, 'inner', 200)],
+            [0, spinElement(C.white, 'outter', 150)],
+            [0, spinElement(C.white, 'outter', 300)]
         ]
     }
 ];
@@ -356,6 +388,7 @@ var instructions = {
     type: 'timeline',
     sets: [
         [50, whirl],
+        [100, spin],
         [100, simpleBurst(C.purple, 0)],
         [15, simpleTails(C.pink, 2, 3)],
         [15, simpleBurst(C.pink, 1)],
