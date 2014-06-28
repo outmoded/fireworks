@@ -426,4 +426,4 @@ var solid = {
 };
 
 
-exports.animation = 'var animation = ' + JSON.stringify(Fireworks.compile(instructions)) + ';';
+exports.animation = Fireworks.compile(instructions);

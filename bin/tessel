@@ -1,0 +1,30 @@
+#!/usr/bin/env node
+
+var Fireworks = require('..');
+var Script = require(process.argv[2]);
+
+
+var animation = Script.animation;
+var pixels = Fireworks.neopixels(animation);
+
+
+var start = function () {
+
+    var hw = process.binding('hw');
+    console.log('starting...');
+    hw.neopixel_animation_buffer(arr);
+
+    var round = 1;
+    var now = Date.now();
+    process.on('neopixel_animation_complete', function () {
+
+        var duration = Date.now() - now;
+        console.log('round: ' + (round++) + ' (' + Math.floor(duration) + 'ms, ' + Math.floor(numLEDs / duration * 1000) + 'fps)');
+        now = Date.now();
+        hw.neopixel_animation_buffer(arr);
+    });
+};
+
+console.log('var arr = ' + JSON.stringify(pixels) + ';');
+console.log(start.toString());
+console.log('start();');
