@@ -1,3 +1,5 @@
+// Load modules
+
 var Fs = require('fs');
 var Path = require('path');
 var Lame = require('lame');
@@ -6,6 +8,8 @@ var Tessel = require('tessel');
 var Fireworks = require('../');
 var Script = require(process.argv[2]);
 
+
+// Declare internals
 
 var internals = {};
 
@@ -31,20 +35,26 @@ internals.play = function () {
             client.stderr.pipe(process.stderr);
             console.info('Running device script...');
 
-            client.interface.writeProcessMessage({ type: 'animation' });
-            client.once('message', function (msg) {
+            client.interface.writeProcessMessage({ type: 'play' });
+            client.on('message', function (msg) {
 
-                internals.sound('burst');
-                console.log('MESSAGE:' + msg);
+                if (msg.type === 'done') {
+                    console.log('Finished')
+                }
+
+                if (msg.type === 'audio') {
+                    console.log('Audio: ' + msg.sound);
+                    internals.sound(msg.sound);
+                }
             });
 
             // Stop on Ctrl+C
 
             process.on('SIGINT', function() {
 
+                console.log('Script aborted');
                 setTimeout(function () {
 
-                    console.log('Script aborted');
                     process.exit();
                 }, 200);
 
@@ -80,18 +90,42 @@ internals.device = function () {
 
         var tessel = process.binding('hw');
 
+        var pos = 0;
+        var next = function () {
+
+            if (pos === array.length) {
+                pos = 0;
+            }
+
+            var sequence = array[pos];
+            console.log('Sequence: ' + pos + ' (' + sequence.type + ')');
+
+            pos++
+
+            // Audio
+
+            if (sequence.type === 'audio') {
+                process.send(sequence);
+                return next();
+            }
+
+            // Animation
+
+            var now = Date.now();
+            tessel.neopixel_animation_buffer(sequence.pixels);
+            process.once('neopixel_animation_complete', function () {
+
+                var duration = Date.now() - now;
+                console.log('Stats: ' + Math.floor(duration) + 'ms, ' + Math.floor(sequence.pixels.length / duration * 1000) + 'fps');
+                return next();
+            });
+        };
+
         process.on('message', function (msg) {
 
-            if (msg.type === 'animation') {
+            if (msg.type === 'play') {
                 console.log('Playing...');
-                var now = Date.now();
-                tessel.neopixel_animation_buffer(pixels);
-                process.once('neopixel_animation_complete', function () {
-
-                    var duration = Date.now() - now;
-                    console.log('Animation: end' + ' (' + Math.floor(duration) + 'ms, ' + Math.floor(pixels.length / duration * 1000) + 'fps)');
-                    process.send('done');
-                });
+                next();
             }
         });
 
@@ -101,7 +135,7 @@ internals.device = function () {
     console.log('Writing device file...');
     var file = Fs.createWriteStream(__dirname + internals.deviceFile);
     var pixels = internals.neopixels();
-    file.write('var pixels = ' + JSON.stringify(pixels) + ';\n');
+    file.write('var array = ' + JSON.stringify(pixels) + ';\n');
     file.write('var play = ' + play.toString() + ';\n');
     file.write('play();\n');
     file.end();
@@ -113,9 +147,21 @@ internals.neopixels = function () {
     var animation = Script.animation;
 
     var array = [];
+    var sequence = [];
+
     var segments = ['launcher', 'burst1', 'burst2', 'tail1', 'tail2', 'curve'];
 
     for (var f = 0, fl = animation[0].length; f < fl; ++f) {
+        var sound = animation[3][f];
+        if (sound) {
+            if (sequence.length) {
+                array.push({ type: 'animation', pixels: sequence });
+                sequence = [];
+            }
+
+            array.push({ type: 'audio', sound: sound });
+        }
+
         var neoFrame = new Buffer(Fireworks.pos.strands.length * Fireworks.pos.strands.count * 3);
         neoFrame.fill(0);
 
@@ -142,7 +188,11 @@ internals.neopixels = function () {
             }
         }
 
-        array.push(neoFrame.toString('binary'));
+        sequence.push(neoFrame.toString('binary'));
+    }
+
+    if (sequence.length) {
+        array.push({ type: 'animation', pixels: sequence });
     }
 
     return array;
