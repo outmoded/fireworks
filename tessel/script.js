@@ -76,7 +76,7 @@ var simpleCurve = function (color, location, strand) {
 var whiteBurst = [
     {
         type: 'launch',
-        colors: [C.white, 0, 0],
+        colors: [C.red, 0, 0],
         size: 10,
         blanks: 15,
         audio: 'launch'
@@ -86,13 +86,13 @@ var whiteBurst = [
         offset: 'end',
         first: {
             type: 'burst',
-            color: C.white,
+            color: C.red,
             size: 5,
             audio: 'burst'
         },
         second: {
             type: 'tails',
-            color: C.white,
+            color: C.red,
             size: 5
         }
     }
@@ -367,18 +367,18 @@ var spin = [
     {
         type: 'timeline',
         sets: [
-            [0, spinElement(C.white, 'inner', 0)],
-            [0, spinElement(C.white, 'inner', 75)],
-            [0, spinElement(C.white, 'outter', 0)],
-            [0, spinElement(C.white, 'outter', 225)],
-            [10, spinElement(C.white, 'inner', 75)],
-            [0, spinElement(C.white, 'inner', 125)],
-            [0, spinElement(C.white, 'outter', 75)],
-            [0, spinElement(C.white, 'outter', 300)],
-            [10, spinElement(C.white, 'inner', 150)],
-            [0, spinElement(C.white, 'inner', 200)],
-            [0, spinElement(C.white, 'outter', 150)],
-            [0, spinElement(C.white, 'outter', 300)]
+            [0, spinElement(C.red, 'inner', 0)],
+            [0, spinElement(C.red, 'inner', 75)],
+            [0, spinElement(C.red, 'outter', 0)],
+            [0, spinElement(C.red, 'outter', 225)],
+            [10, spinElement(C.red, 'inner', 75)],
+            [0, spinElement(C.red, 'inner', 125)],
+            [0, spinElement(C.red, 'outter', 75)],
+            [0, spinElement(C.red, 'outter', 300)],
+            [10, spinElement(C.red, 'inner', 150)],
+            [0, spinElement(C.red, 'inner', 200)],
+            [0, spinElement(C.red, 'outter', 150)],
+            [0, spinElement(C.red, 'outter', 300)]
         ]
     }
 ];
@@ -389,11 +389,11 @@ var instructions = {
     sets: [
         [50, whirl],
         [100, spin],
-        [100, simpleBurst(C.purple, 0)],
-        [15, simpleTails(C.pink, 2, 3)],
-        [15, simpleBurst(C.pink, 1)],
-        [70, simpleCurve(C.yellow, 'inner', 0)],
-        [15, simpleCurve(C.orange, 'outter', 2)],
+        [100, simpleBurst(C.red, 0)],
+        [15, simpleTails(C.red, 2, 3)],
+        [15, simpleBurst(C.red, 1)],
+        [70, simpleCurve(C.red, 'inner', 0)],
+        [15, simpleCurve(C.red, 'outter', 2)],
         [50, whiteBurst],
         [15, blueCircles],
         [10, whiteBurst],
@@ -426,4 +426,4 @@ var solid = {
 };
 
 
-exports.animation = Fireworks.compile(whiteBurst);
+exports.animation = Fireworks.compile(rainbow);
