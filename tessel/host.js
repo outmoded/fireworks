@@ -18,8 +18,8 @@ internals.deviceFile = '/device.js';
 
 internals.play = function () {
 
-    internals.device();
-
+    var animation = internals.device();
+    // animation = animation.slice(0, 3780);
     console.log('Connecting to Tessel...');
     Tessel.findTessel(null, true, function (err, client) {
 
@@ -35,7 +35,10 @@ internals.play = function () {
             client.stderr.pipe(process.stderr);
             console.info('Running device script...');
 
-            client.interface.writeProcessMessage({ type: 'play' });
+            var frameLength = new Buffer(4);
+            frameLength.writeUInt32BE((420 * 3 * 3), 0);
+            var animationMessage = Buffer.concat([frameLength, animation]);
+            client.interface.writeProcessMessageRaw(animationMessage);
             client.on('message', function (msg) {
 
                 if (msg.type === 'done') {
@@ -133,34 +136,39 @@ internals.device = function () {
     };
 
     console.log('Writing device file...');
-    var file = Fs.createWriteStream(__dirname + internals.deviceFile);
+    // var file = Fs.createWriteStream(__dirname + internals.deviceFile);
     var pixels = internals.neopixels();
-    file.write('var array = ' + JSON.stringify(pixels) + ';\n');
-    file.write('var play = ' + play.toString() + ';\n');
-    file.write('play();\n');
-    file.end();
+    // console.log(Array.isArray(pixels[1].pixels));
+    // console.log('pixel at position', 1, 'is', pixels[1].pixels.splice(0, 1));
+    // file.write('var array = ' + JSON.stringify(pixels) + ';\n');
+    // file.write('var play = ' + play.toString() + ';\n');
+    // file.write('play();\n');
+    // file.end();
+
+    return pixels;
 };
+
 
 
 internals.neopixels = function () {
 
     var animation = Script.animation;
 
-    var array = [];
+    // var array = [];
     var sequence = [];
 
     var segments = ['launcher', 'burst1', 'burst2', 'tail1', 'tail2', 'curve'];
 
     for (var f = 0, fl = animation[0].length; f < fl; ++f) {
-        var sound = animation[3][f];
-        if (sound) {
-            if (sequence.length) {
-                array.push({ type: 'animation', pixels: sequence });
-                sequence = [];
-            }
+        // var sound = animation[3][f];
+        // if (sound) {
+        //     if (sequence.length) {
+        //         array.push({ type: 'animation', pixels: sequence });
+        //         sequence = [];
+        //     }
 
-            array.push({ type: 'audio', sound: sound });
-        }
+        //     array.push({ type: 'audio', sound: sound });
+        // }
 
         var neoFrame = new Buffer(Fireworks.pos.strands.length * Fireworks.pos.strands.count * 3);
         neoFrame.fill(0);
@@ -188,14 +196,15 @@ internals.neopixels = function () {
             }
         }
 
-        sequence.push(neoFrame.toString('binary'));
+        sequence.push(neoFrame);
     }
 
-    if (sequence.length) {
-        array.push({ type: 'animation', pixels: sequence });
-    }
+    // if (sequence.length) {
+    //     array.push({ type: 'animation', pixels: sequence });
+    // }
 
-    return array;
+    // return array;
+    return Buffer.concat(sequence);
 };
 
 
